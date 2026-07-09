@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joici Escarabelle · Biomédica Esteta</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #FBF8F2;
+  --cream2: #F6EEDF;
+  --gold: #BDA256;
+  --gold-dark: #8F7A3F;
+  --ink: #2A2620;
+  --muted: #8A7F6A;
+  --card: #FFFFFF;
+  --border: rgba(42,38,32,0.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: linear-gradient(180deg, var(--cream) 0%, var(--cream2) 100%);
+  color: var(--ink);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 2.5rem 1rem 3rem;
+}
+
+.phone {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ─── PROFILE ─── */
+.avatar-wrap {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--gold);
+  margin-bottom: 1.1rem;
+  box-shadow: 0 6px 24px rgba(189,162,86,0.18);
+  opacity: 0;
+  animation: fadeUp .6s ease forwards .1s;
+}
+.avatar-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 4%; }
+
+.name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  color: var(--gold-dark);
+  font-weight: 500;
+  margin-bottom: .15rem;
+  opacity: 0;
+  animation: fadeUp .6s ease forwards .2s;
+}
+
+.role {
+  font-size: .72rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: .5rem;
+  opacity: 0;
+  animation: fadeUp .6s ease forwards .28s;
+}
+
+.bio {
+  font-size: .85rem;
+  color: var(--ink);
+  text-align: center;
+  line-height: 1.5;
+  max-width: 320px;
+  margin-bottom: .35rem;
+  opacity: 0;
+  animation: fadeUp .6s ease forwards .34s;
+}
+
+.location {
+  font-size: .68rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.8rem;
+  opacity: 0;
+  animation: fadeUp .6s ease forwards .4s;
+}
+
+/* ─── LINK BUTTONS ─── */
+.links {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+}
+
+.link-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  width: 100%;
+  padding: .95rem 1.2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 2px 12px rgba(42,38,32,0.05);
+  transition: background .25s ease, border-color .25s ease, transform .15s ease, box-shadow .25s ease;
+  opacity: 0;
+  animation: fadeUp .6s ease forwards;
+}
+
+.link-btn:nth-child(1) { animation-delay: .45s; }
+.link-btn:nth-child(2) { animation-delay: .52s; }
+.link-btn:nth-child(3) { animation-delay: .59s; }
+.link-btn:nth-child(4) { animation-delay: .66s; }
+.link-btn:nth-child(5) { animation-delay: .73s; }
+.link-btn:nth-child(6) { animation-delay: .80s; }
+
+.link-btn:hover {
+  background: #FFFCF6;
+  border-color: var(--gold);
+  box-shadow: 0 6px 18px rgba(189,162,86,0.14);
+  transform: translateY(-1px);
+}
+.link-btn:active { transform: translateY(0); }
+
+.link-thumb {
+  width: 42px;
+  height: 42px;
+  border-radius: 9px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--cream2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.link-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.link-text { flex: 1; min-width: 0; }
+.link-title {
+  font-size: .95rem;
+  color: var(--ink);
+  font-weight: 400;
+  letter-spacing: .01em;
+}
+.link-sub {
+  font-size: .68rem;
+  color: var(--muted);
+  margin-top: .1rem;
+}
+
+.link-arrow {
+  font-size: .8rem;
+  color: var(--gold-dark);
+  flex-shrink: 0;
+}
+
+/* Promo highlight (Agende sua avaliação) */
+.link-btn.promo {
+  border-color: var(--gold);
+  background: linear-gradient(135deg, #2A2620, #40382A);
+}
+.link-btn.promo:hover { background: linear-gradient(135deg, #332D25, #4A4130); }
+.link-btn.promo .link-title { color: var(--gold); font-weight: 500; }
+.link-btn.promo .link-sub { color: rgba(251,248,242,0.6); }
+.link-btn.promo .link-arrow { color: var(--gold); }
+.link-btn.promo .link-thumb { background: rgba(251,248,242,0.1); }
+
+/* Footer */
+.footer-note {
+  margin-top: 1.6rem;
+  font-size: .65rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0;
+  animation: fadeUp .6s ease forwards .85s;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── CATEGORY MODAL (list of services) ─── */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(26,22,16,0.6);
+  backdrop-filter: blur(2px);
+  z-index: 1000;
+  align-items: flex-end;
+  justify-content: center;
+}
+.modal.active { display: flex; }
+
+.modal-sheet {
+  width: 100%;
+  max-width: 460px;
+  max-height: 86vh;
+  background: var(--cream);
+  border-radius: 22px 22px 0 0;
+  padding: 1.4rem 1.2rem 1.6rem;
+  overflow-y: auto;
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.25);
+  animation: slideUp .35s ease;
+}
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.1rem;
+}
+.modal-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  color: var(--gold-dark);
+  font-weight: 500;
+}
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1.4rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: .3rem;
+}
+.modal-close:hover { color: var(--ink); }
+
+.service-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  margin-bottom: .7rem;
+}
+.service-name {
+  font-size: .95rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: .3rem;
+}
+.service-desc {
+  font-size: .78rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: .8rem;
+}
+.service-btn {
+  display: inline-block;
+  padding: .55rem 1.1rem;
+  border: 1px solid var(--gold);
+  color: var(--gold-dark);
+  font-family: 'Jost', sans-serif;
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all .25s ease;
+}
+.service-btn:hover { background: var(--gold); color: #fff; }
+
+@media (max-width: 420px) {
+  .modal-sheet { max-height: 82vh; }
+}
+</style>
+</head>
+<body>
+
+<div class="phone">
+
+  <div class="avatar-wrap"><img src="avatar.jpg" alt="Joici Escarabelle"></div>
+  <h1 class="name">Joici Escarabelle</h1>
+  <p class="role">Biomédica Esteta</p>
+  <p class="bio">Atendimento humanizado e individualizado, unindo ciência e cuidado para realçar sua beleza e bem-estar.</p>
+  <p class="location">📍 Sernamby, São Mateus - ES</p>
+
+  <div class="links">
+
+    <a class="link-btn promo" href="https://wa.me/5527998546759?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" rel="noopener">
+      <div class="link-thumb"><img src="avatar.jpg" alt="Agende sua avaliação" style="object-position: 50% 4%;"></div>
+      <div class="link-text">
+        <div class="link-title">Agende sua avaliação</div>
+        <div class="link-sub">Fale direto comigo no WhatsApp</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <div class="link-btn" onclick="openCategory('facial')">
+      <div class="link-thumb"><img src="capa-facial.jpg" alt="Tratamentos Faciais"></div>
+      <div class="link-text">
+        <div class="link-title">Tratamentos Faciais</div>
+        <div class="link-sub">Limpeza, peeling, dermaplaning e mais</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </div>
+
+    <div class="link-btn" onclick="openCategory('corporal')">
+      <div class="link-thumb"><img src="capa-corporal.jpg" alt="Tratamentos Corporais"></div>
+      <div class="link-text">
+        <div class="link-title">Tratamentos Corporais</div>
+        <div class="link-sub">Drenagem e massagem relaxante</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </div>
+
+    <div class="link-btn" onclick="openCategory('injetaveis')">
+      <div class="link-thumb"><img src="capa-injetaveis.jpg" alt="Procedimentos Injetáveis"></div>
+      <div class="link-text">
+        <div class="link-title">Procedimentos Injetáveis</div>
+        <div class="link-sub">Botox, SkinBooster e intradermoterapia</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </div>
+
+    <a class="link-btn" href="https://maps.apple.com/place?map=explore&address=Rua+Reginaldo+Daher+Santos%2C+306%2C+Sernamby%2C+S%C3%A3o+Mateus+-+ES%2C+29930-700%2C+Brasil&coordinate=-18.721912%2C-39.854633&name=Rua+Reginaldo+Daher+Santos%2C+306" target="_blank" rel="noopener">
+      <div class="link-thumb"><img src="capa-localizacao.jpg" alt="Localização"></div>
+      <div class="link-text">
+        <div class="link-title">Localização</div>
+        <div class="link-sub">Clínica Débora Rabelo · Sernamby</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <a class="link-btn" href="https://www.instagram.com/drajoiciescarabelle/" target="_blank" rel="noopener">
+      <div class="link-thumb"><img src="logo.png" alt="Instagram"></div>
+      <div class="link-text">
+        <div class="link-title">Instagram</div>
+        <div class="link-sub">@drajoiciescarabelle</div>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
+
+  </div>
+
+  <p class="footer-note">Dra Joici Escarabelle · São Mateus, ES</p>
+
+</div>
+
+<!-- ─── CATEGORY MODAL ─── -->
+<div class="modal" id="category-modal">
+  <div class="modal-sheet">
+    <div class="modal-header">
+      <span class="modal-title" id="modal-title">Categoria</span>
+      <button class="modal-close" onclick="closeCategory()">✕</button>
+    </div>
+    <div id="modal-list"></div>
+  </div>
+</div>
+
+<script>
+const WA = '5527998546759';
+
+const categories = {
+  facial: {
+    title: 'Tratamentos Faciais',
+    items: [
+      { name: 'Limpeza de Pele Profunda', desc: 'Procedimento completo que remove impurezas, células mortas e cravos, deixando a pele mais saudável, limpa e renovada.', text: 'Olá, gostaria de agendar uma limpeza de pele profunda.' },
+      { name: 'Dermaplaning', desc: 'Técnica que promove esfoliação mecânica suave, removendo células mortas e penugens faciais.', text: 'Olá, gostaria de agendar o dermaplaning.' },
+      { name: 'Peeling Químico', desc: 'Procedimento que promove a renovação celular através da aplicação do ácido retinóico.', text: 'Olá, gostaria de agendar o peeling.' },
+      { name: 'Limpeza de Pele + Dermaplaning', desc: 'Combinação completa: a limpeza remove impurezas e cravos, enquanto o dermaplaning promove esfoliação suave e uniforme.', text: 'Olá, gostaria de agendar uma limpeza de pele com dermaplaning.' },
+      { name: 'Limpeza de Pele + Peeling', desc: 'Tratamento intensivo que une a limpeza de pele à ação renovadora do peeling químico.', text: 'Olá, gostaria de agendar uma limpeza de pele com peeling.' },
+      { name: 'Revitalização Facial', desc: 'Tratamento que promove hidratação, nutrição e luminosidade, devolvendo o viço natural da pele.', text: 'Olá, gostaria de agendar uma revitalização facial.' }
+    ]
+  },
+  corporal: {
+    title: 'Tratamentos Corporais',
+    items: [
+      { name: 'Drenagem Linfática', desc: 'Massagem que estimula o sistema linfático, auxiliando na eliminação de toxinas e líquidos retidos.', text: 'Olá, gostaria de agendar uma drenagem.' },
+      { name: 'Massagem Relaxante', desc: 'Técnicas manuais relaxantes com pedras quentes e massageador. Ventosaterapia incluída de forma opcional, sem custo adicional.', text: 'Olá, gostaria de agendar uma massagem relaxante.' }
+    ]
+  },
+  injetaveis: {
+    title: 'Procedimentos Injetáveis',
+    items: [
+      { name: 'SkinBooster', desc: 'Ácido hialurônico de baixa densidade indicado para hidratação profunda e melhora da qualidade da pele.', text: 'Olá!\n\nTenho interesse na avaliação para SkinBooster' },
+      { name: 'Toxina Botulínica (Botox)', desc: 'Procedimento indicado para suavizar linhas de expressão e prevenir rugas causadas pela movimentação muscular.', text: 'Olá!\n\nTenho interesse na avaliação para toxina botulínica (botox)' },
+      { name: 'Intradermoterapia · Gordura Localizada', desc: 'Ativos injetáveis que auxiliam na quebra da gordura localizada, melhorando o contorno corporal.', text: 'Olá!\n\nTenho interesse na avaliação para mesoterapia para gordura localizada.' },
+      { name: 'Intradermoterapia · Flacidez', desc: 'Ativos bioestimuladores que melhoram a firmeza e sustentação da pele, estimulando a produção de colágeno.', text: 'Olá!\n\nTenho interesse na avaliação para mesoterapia para flacidez' },
+      { name: 'Intradermoterapia · Gerenciamento de Peso', desc: 'Ativos específicos que auxiliam o organismo durante o processo de emagrecimento, complementando hábitos saudáveis.', text: 'Olá!\n\nTenho interesse na avaliação para intradermoterapia para gerenciamento de peso' }
+    ]
+  }
+};
+
+function openCategory(key) {
+  const cat = categories[key];
+  document.getElementById('modal-title').textContent = cat.title;
+  const list = document.getElementById('modal-list');
+  list.innerHTML = cat.items.map(item => `
+    <div class="service-item">
+      <div class="service-name">${item.name}</div>
+      <div class="service-desc">${item.desc}</div>
+      <a class="service-btn" href="https://wa.me/${WA}?text=${encodeURIComponent(item.text)}" target="_blank" rel="noopener">Agendar →</a>
+    </div>
+  `).join('');
+  document.getElementById('category-modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeCategory() {
+  document.getElementById('category-modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.getElementById('category-modal').addEventListener('click', e => {
+  if (e.target.id === 'category-modal') closeCategory();
+});
+</script>
+
+</body>
+</html>
